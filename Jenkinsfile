@@ -20,8 +20,9 @@ node {
         input message: 'Lanjutkan ke tahap Deploy?', ok: 'Proceed'
     }
     stage('Deploy') {
-        sh './jenkins/scripts/deliver.sh'
+        archiveArtifacts 'target/simple-java-app-1.0-SNAPSHOT.jar'
+	    docker.build("simple-java-app:latest");
+        sh 'docker run --rm simple-java-app:latest'
         sh 'sleep 1m'
-        sh './jenkins/scripts/kill.sh'
     }
 }

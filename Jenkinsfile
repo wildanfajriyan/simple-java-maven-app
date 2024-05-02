@@ -22,7 +22,7 @@ node {
     stage('Deploy') {
         archiveArtifacts 'target/simple-java-app-1.0-SNAPSHOT.jar'
 	    docker.build("simple-java-app:latest");
-        sh 'docker run --rm simple-java-app:latest'
+        sh 'docker run --rm simple-java-app'
         sh 'sleep 1m'
     }
 }
